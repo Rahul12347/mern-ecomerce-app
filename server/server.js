@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 const express = require("express");
@@ -19,7 +20,7 @@ const commonFeatureRouter = require("./routes/common/feature-routes");
 
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
 
