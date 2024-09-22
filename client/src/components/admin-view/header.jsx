@@ -1,14 +1,20 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { logoutUser } from "@/store/auth-slice";
+import { resetTokenandCredentials } from "@/store/auth-slice";
 import { AlignJustify, LogOut } from "lucide-react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 
 function AdminHeader({ setOpen }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleLogout() {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
+    dispatch(resetTokenandCredentials());
+    sessionStorage.clear();
+    navigate('/auth/login')
   }
 
   return (

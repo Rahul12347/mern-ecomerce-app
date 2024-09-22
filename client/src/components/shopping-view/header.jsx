@@ -1,14 +1,18 @@
+/* eslint-disable no-unused-vars */
+import { shoppingViewHeaderMenuItems } from "@/config";
+import { resetTokenandCredentials } from "@/store/auth-slice";
+import { fetchCartItems } from "@/store/shop/cart-slice";
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Link,
   useLocation,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
-import { useDispatch, useSelector } from "react-redux";
-import { shoppingViewHeaderMenuItems } from "@/config";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,12 +21,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "../ui/avatar";
-import { logoutUser } from "@/store/auth-slice";
-import UserCartWrapper from "./cart-wrapper";
-import { useEffect, useState } from "react";
-import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import UserCartWrapper from "./cart-wrapper";
 
 function MenuItems() {
   const navigate = useNavigate();
@@ -72,7 +73,10 @@ function HeaderRightContent() {
   const dispatch = useDispatch();
 
   function handleLogout() {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
+    dispatch(resetTokenandCredentials())
+    sessionStorage.clear();
+    navigate('/auth/login')
   }
 
   useEffect(() => {
